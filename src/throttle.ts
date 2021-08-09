@@ -1,9 +1,17 @@
-const throttleFn = require('lodash.throttle');
+import throttle from 'lodash.throttle';
 
-export function throttle(milliseconds: number = 0, options = {}): any {
-  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value;
-    descriptor.value = throttleFn(originalMethod, milliseconds, options);
-    return descriptor;
+interface ThrottleSettings {
+  leading?: boolean;
+  trailing?: boolean;
+}
+
+export function Throttle(milliseconds = 0, options?: ThrottleSettings) {
+  return function _throttle(_target: Object, _propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
+    const descriptorCopy = { ...descriptor };
+    descriptorCopy.value = function _new(...args: unknown[]) {
+      const throttled = throttle(descriptor.value, milliseconds, options).bind(this);
+      return throttled(...args);
+    };
+    return descriptorCopy;
   };
 }

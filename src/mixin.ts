@@ -1,8 +1,8 @@
-export function Mixin(baseCtors: Function[]): any {
-  return function(derivedCtor: Function) {
-    baseCtors.forEach(baseCtor => {
-      Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-        derivedCtor.prototype[name] = baseCtor.prototype[name];
+export function Mixin(baseConstructors: Function[]): any {
+  return function _mixin(derivedConstructor: Function) {
+    baseConstructors.forEach(constructor => {
+      Object.getOwnPropertyNames(constructor.prototype).forEach(name => {
+        derivedConstructor.prototype[name] = constructor.prototype[name];
       });
     });
   };

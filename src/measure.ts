@@ -1,25 +1,18 @@
-import * as util from 'util'
+import { performance } from 'perf_hooks';
 
-export function measure(target: any, propertyKey: string, descriptor: PropertyDescriptor): any {
-  const originalMethod = descriptor.value;
-  const name = target && target.constructor && target.constructor.name ? `${target.constructor.name}.${propertyKey}` : propertyKey;
+export function Measure(): MethodDecorator {
+  return function _measure(target: Object, propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
+    const descriptorCopy = { ...descriptor };
+    const name = target.constructor.name ? `${target.constructor.name}.${String(propertyKey)}` : String(propertyKey);
 
-  if (util.types.isAsyncFunction(originalMethod)) {
-    descriptor.value = async function (...args: any): Promise<any> {
+    descriptorCopy.value = function _fn(...args: unknown[]) {
       const start = performance.now();
-      const result = await originalMethod.apply(this, args);
+      const result = descriptor.value.apply(this, args);
       const end = performance.now();
-      console.log(`Call to ${name} took ${(end - start).toFixed(2)} milliseconds.`);
-      return result;
-    }
-  } else {
-    descriptor.value = function (...args) {
-      const start = performance.now();
-      const result = originalMethod.apply(this, args);
-      const end = performance.now();
+      // eslint-disable-next-line no-console
       console.log(`Call to ${name} took ${(end - start).toFixed(2)} milliseconds.`);
       return result;
     };
-  }
-  return descriptor;
+    return descriptorCopy;
+  };
 }

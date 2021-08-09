@@ -1,9 +1,9 @@
-export { measure } from './measure';
-export { delay } from './delay';
-export { debounce } from './debounce';
-export { throttle } from './throttle';
-export { once } from './once';
+export { Measure } from './measure';
+export { Delay } from './delay';
+export { Debounce } from './debounce';
+export { Throttle } from './throttle';
+export { Once } from './once';
 export { Mixin } from './mixin';
-export { memo } from './memoize';
-export { bind } from './bind';
+export { Memo } from './memoize';
+export { Bind } from './bind';
 export { SortBy } from './sortby';

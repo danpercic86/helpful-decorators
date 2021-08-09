@@ -1,7 +1,9 @@
 const onceFn = require('lodash.once');
 
-export function once(target: any, propertyKey: string, descriptor: PropertyDescriptor): any {
-  const originalMethod = descriptor.value;
-  descriptor.value = onceFn(originalMethod);
-  return descriptor;
+export function Once() {
+  return function _once(_target: Object, _propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    descriptor.value = onceFn(originalMethod);
+    return descriptor;
+  };
 }

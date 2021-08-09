@@ -1,28 +1,27 @@
-import { debounce } from '../src';
+import { Debounce } from '../src';
 
-jest.mock('lodash.debounce', () => {
-  return (func, wait) => {
-    let timeout;
-    return function(this: any, ...args) {
-      const context = this;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
+jest.mock('lodash.debounce', () => (func: Function, wait: number) => {
+  // eslint-disable-next-line no-undef
+  let timeout: NodeJS.Timeout;
+  return function _fn(this: any, ...args: unknown[]) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
   };
 });
 
 jest.useFakeTimers();
 
 class Test {
-  id;
+  id: number;
 
-  constructor(id) {
+  constructor(id: number) {
     this.id = id;
   }
 
-  @debounce(3000)
+  @Debounce(3000)
   method() {
-    this.id++;
+    this.id += 1;
   }
 }
 

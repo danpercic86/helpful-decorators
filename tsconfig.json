@@ -1,20 +1,27 @@
 {
-  "compilerOptions": {                  
-    "target": "es5",                        
-    "module": "commonjs",                     
-    "lib": ["dom", "es2016"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "lib": [
+      "dom",
+      "es2018"
+    ],
     "declaration": true,
-    "outDir": "./dist",      
-    "noImplicitAny": false,
+    "outDir": "./dist",
+    "noImplicitAny": true,
     "experimentalDecorators": true,
-    "strict": true,                
+    "strict": true,
     "noUnusedLocals": true,
     "noEmitOnError": true,
-    "noUnusedParameters": false, 
-    "typeRoots": ["./node_modules/@types"]
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "exclude": [
-    "__tests__",
     "dist",
     "node_modules"
   ]

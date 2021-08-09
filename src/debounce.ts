@@ -1,17 +1,25 @@
-const debounceFn = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 
-export function debounce(milliseconds: number = 0, options = {}): any {
-  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+interface DebounceSettings {
+  leading?: boolean;
+  maxWait?: number;
+  trailing?: boolean;
+}
+
+export function Debounce(milliseconds = 0, options?: DebounceSettings) {
+  return function _debounce(_target: Object, _propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
     const map = new WeakMap();
-    const originalMethod = descriptor.value;
-    descriptor.value = function(...params) {
+    const descriptorCopy = { ...descriptor };
+
+    descriptorCopy.value = function _new(...args: unknown[]) {
       let debounced = map.get(this);
       if (!debounced) {
-        debounced = debounceFn(originalMethod, milliseconds, options).bind(this);
+        debounced = debounce(descriptor.value, milliseconds, options).bind(this);
         map.set(this, debounced);
       }
-      debounced(...params);
+      return debounced(...args);
     };
-    return descriptor;
+
+    return descriptorCopy;
   };
 }
