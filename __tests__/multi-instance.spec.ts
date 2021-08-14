@@ -1,15 +1,5 @@
 import { Debounce } from '../src';
 
-jest.mock('lodash.debounce', () => (func: Function, wait: number) => {
-  // eslint-disable-next-line no-undef
-  let timeout: NodeJS.Timeout;
-  return function _fn(this: any, ...args: unknown[]) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
-});
-
 jest.useFakeTimers();
 
 class Test {

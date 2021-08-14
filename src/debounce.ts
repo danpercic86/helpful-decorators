@@ -8,8 +8,16 @@ interface DebounceSettings {
 
 export function Debounce(milliseconds = 0, options?: DebounceSettings): MethodDecorator {
   return function _debounce(_target: Object, _propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
+    const map = new WeakMap();
     const descriptorCopy = {...descriptor};
-    descriptorCopy.value = debounce(descriptor.value, milliseconds, options);
+    descriptorCopy.value = function _value(...args: unknown[]): unknown {
+      let debounced = map.get(this);
+      if (!debounced) {
+        debounced = debounce(descriptor.value, milliseconds, options).bind(this);
+        map.set(this, debounced);
+      }
+      return debounced(...args);
+    };
     return descriptorCopy;
   };
 }
