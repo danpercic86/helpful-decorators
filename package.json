@@ -14,19 +14,21 @@
   },
   "files": [
     "dist/*",
-    "package.json",
-    "README.md",
-    "LICENSE"
+    "package.json"
   ],
   "license": "MIT",
   "author": "Netanel Basal",
   "keywords": [
     "decorators",
+    "typescript decorators",
     "setTimeout decorator",
+    "delay decorator",
     "debounce decorator",
     "once decorator",
     "mixin decorator",
-    "measure decorator"
+    "measure decorator",
+    "bind decorator",
+    "required decorator"
   ],
   "devDependencies": {
     "@types/jest": "26.0.24",
