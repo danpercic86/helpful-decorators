@@ -2,10 +2,18 @@
   "name": "helpful-decorators",
   "version": "2.2.0",
   "description": "Helpful decorators for typescript projects",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/NetanelBasal/helpful-decorators"
   },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jest.config.js"
+  },
+  "files": [
+    "src/*"
+  ],
   "@pika/pack": {
     "pipeline": [
       [
@@ -80,7 +88,6 @@
     "lodash.delay": "4.1.1",
     "lodash.memoize": "4.1.2",
     "lodash.once": "4.1.1",
-    "lodash.throttle": "4.1.1",
-    "tslib": "^2.3.1"
+    "lodash.throttle": "4.1.1"
   }
 }
