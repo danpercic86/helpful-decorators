@@ -7,3 +7,4 @@ export { Mixin } from './mixin';
 export { Memo } from './memoize';
 export { Bind } from './bind';
 export { SortBy } from './sortby';
+export { Required } from './required'

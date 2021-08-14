@@ -1,12 +1,12 @@
-export function Delay(milliseconds: number = 0) {
-  return function _delay(_target: Object, _propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value;
+export function Delay(milliseconds: number = 0): MethodDecorator {
+  return function _delay(_target: Object, _propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
+    const descriptorCopy = { ...descriptor }
 
-    descriptor.value = function _new(...args: unknown[]) {
+    descriptorCopy.value = function _new(...args: unknown[]) {
       setTimeout(() => {
-        originalMethod.apply(this, args);
+        descriptor.value.apply(this, args);
       }, milliseconds);
     };
-    return descriptor;
+    return descriptorCopy;
   };
 }

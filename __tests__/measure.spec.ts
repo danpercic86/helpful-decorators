@@ -1,4 +1,4 @@
-import {Measure} from '../src';
+import { Measure } from '../src';
 
 const fibonacci = (n: number): number => {
   if (n === 0) return 0;
