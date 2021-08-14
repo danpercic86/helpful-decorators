@@ -1,29 +1,29 @@
 import { Throttle } from '../src';
 
-jest.mock('lodash.throttle');
-
-const throttleFn = require('lodash.throttle');
 
 jest.useFakeTimers();
+const log = jest.fn((...args) => console.log(...args));
 
 describe('throttle', () => {
-  const func = function called() {
-    return 'called';
-  };
-
-  throttleFn.mockImplementation(() => func);
-
   class TestThrottle {
-    @Throttle(3000)
-    method() {
-      // eslint-disable-next-line no-console
-      console.log('Throttle Worked!');
+    val = 5;
+
+    msg = 'Throttle Worked with value ';
+
+    @Throttle(500)
+    method(specificMsg: string) {
+      log(this.msg, this.val, specificMsg);
     }
   }
 
   it('should call throttle', () => {
-    new TestThrottle().method();
-    expect(throttleFn.mock.calls.length).toBe(1);
-    expect(throttleFn.mock.calls[0][1]).toEqual(3000);
+    const test = new TestThrottle();
+    test.method('a');
+    test.method('b');
+    test.method('c');
+    expect(log.mock.calls.length).toBe(1);
+    expect(log.mock.calls[0][0]).toBe(test.msg);
+    expect(log.mock.calls[0][1]).toBe(test.val);
+    expect(log.mock.calls[0][2]).toBe('a');
   });
 });
