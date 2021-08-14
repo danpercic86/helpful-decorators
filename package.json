@@ -1,6 +1,6 @@
 {
   "name": "@danpercic86/helpful-decorators",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Helpful decorators for typescript projects",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
