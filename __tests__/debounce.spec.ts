@@ -1,28 +1,26 @@
 import { Debounce } from '../src';
 
-jest.mock('lodash.debounce');
-
-const debounceFn = require('lodash.debounce');
-
 jest.useFakeTimers();
+const log = jest.fn((...args) => console.log(...args));
 
 describe('debounce', () => {
-  const func = function called() {
-    return 'called';
-  };
-
-  debounceFn.mockImplementation(() => func);
-
   class TestDebounce {
-    @Debounce(3000)
-    method() {
-      console.log('Debounce Worked!');
+    msg = 'Debounce Worked!';
+
+    @Debounce(500)
+    method(specificMsg: string) {
+      log(this.msg, specificMsg);
     }
   }
 
-  it('should call debounce', () => {
-    new TestDebounce().method();
-    expect(debounceFn).toBeCalled();
-    expect(debounceFn.mock.calls[0][1]).toEqual(3000);
+  it('should call debounce',  () => {
+    const test = new TestDebounce();
+    test.method('a')
+    test.method('b')
+    test.method('c')
+    test.method('d')
+    test.method('e')
+    jest.advanceTimersByTime(600)
+    expect(log.mock.calls[0][1]).toEqual('e');
   });
 });
