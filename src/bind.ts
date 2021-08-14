@@ -7,16 +7,11 @@
  */
 
 export function Bind(): MethodDecorator {
-  return function _bind<T>(_target: Object, propertyKey: PropertyKey, descriptor: TypedPropertyDescriptor<T>) {
-    if (typeof descriptor.value !== 'function') {
-      throw new TypeError(`@Bind() decorator can only be applied to methods, not to ${typeof descriptor.value}`);
-    }
-
+  return function _bind(_target: Object, propertyKey: PropertyKey, descriptor: PropertyDescriptor): PropertyDescriptor {
     return {
       configurable: true,
-      get(): T {
-        // @ts-ignore
-        const boundMethod: T = descriptor.value!.bind(this);
+      get() {
+        const boundMethod = descriptor.value.bind(this);
         Object.defineProperty(this, propertyKey, {
           value: boundMethod,
           configurable: true,
