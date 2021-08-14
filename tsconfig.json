@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext",
-    "moduleResolution": "Node",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": [
-      "dom",
-      "es2018"
+      "es6",
+      "dom"
     ],
     "declaration": true,
+    "declarationDir": "./dist/types",
+    "removeComments": true,
     "outDir": "./dist",
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strict": true,
+    "importHelpers": true,
     "noUnusedLocals": true,
     "noEmitOnError": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "typeRoots": [
       "./node_modules/@types"
-    ],
+    ]
   },
   "include": ["src/*"]
 }

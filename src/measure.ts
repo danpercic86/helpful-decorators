@@ -1,5 +1,3 @@
-import { performance } from 'perf_hooks';
-
 export function Measure(): MethodDecorator {
   return function _measure(target: Object, propertyKey: PropertyKey, descriptor: PropertyDescriptor) {
     const descriptorCopy = { ...descriptor };

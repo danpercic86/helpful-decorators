@@ -6,3 +6,6 @@ src
 .eslintrc.json
 jest.config.js
 tsconfig.spec.json
+setup-jest-env.js
+yarn.lock
+.gitignore
