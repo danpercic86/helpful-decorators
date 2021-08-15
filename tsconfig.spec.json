@@ -11,5 +11,6 @@
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
-  ]
+  ],
+  "exclude": ["__tests__/project/**/*"]
 }

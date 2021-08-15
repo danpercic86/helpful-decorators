@@ -12,6 +12,7 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
+  modulePathIgnorePatterns: ["<rootDir>/__tests__/project"],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   clearMocks: true,
