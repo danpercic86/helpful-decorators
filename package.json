@@ -4,6 +4,8 @@
   "description": "Helpful decorators for typescript projects",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "homepage": "https://github.com/danpercic86/helpful-decorators",
+  "bugs": "https://github.com/danpercic86/helpful-decorators",
   "repository": {
     "type": "git",
     "url": "git://github.com/danpercic86/helpful-decorators.git"
@@ -13,11 +15,12 @@
     "test": "jest --config jest.config.js"
   },
   "files": [
-    "dist/*",
+    "dist",
     "package.json"
   ],
   "license": "MIT",
-  "author": "Netanel Basal",
+  "author": "Dan Percic",
+  "contributors": ["Netanel Basal"],
   "keywords": [
     "decorators",
     "typescript decorators",
@@ -28,7 +31,9 @@
     "mixin decorator",
     "measure decorator",
     "bind decorator",
-    "required decorator"
+    "required decorator",
+    "angular required input",
+    "angular required decorator"
   ],
   "devDependencies": {
     "@types/jest": "26.0.24",
